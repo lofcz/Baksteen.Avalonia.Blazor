@@ -1,0 +1,25 @@
+@page "/native"
+@using Microsoft.Toolkit.Uwp.Notifications
+@using AudioSwitcher.AudioApi.CoreAudio
+@code {
+    private async Task NativeNotification()
+    {
+        ToastContentBuilder builder = new ToastContentBuilder()
+            .AddText("This is a simple notification");
+
+        builder.Show();
+    }
+
+    private async Task NativeVolume()
+    {
+        CoreAudioDevice defaultPlaybackDevice = new CoreAudioController().DefaultPlaybackDevice;
+        double vol = await defaultPlaybackDevice.GetVolumeAsync();
+        await defaultPlaybackDevice.SetVolumeAsync(vol + 5d);
+    }
+}
+
+<h1>Native demo</h1>
+<div style="display: flex; gap: 15px;">
+    <button class="btn btn-primary" @onclick="NativeNotification">Notification</button>
+    <button class="btn btn-primary" @onclick="NativeVolume">Volume +5</button>
+</div>

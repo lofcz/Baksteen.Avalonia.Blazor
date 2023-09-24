@@ -1,8 +1,19 @@
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Reactive;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
+using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using DemoApp.ViewModels;
+
 using Microsoft.AspNetCore.Components.WebView.WindowsForms;
 using ReactiveUI;
-using System.Reactive;
 
 namespace DemoApp.Views;
 
@@ -20,7 +31,7 @@ public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
         Resources.Add("rootComponents", rootComponents);
 
         InitializeComponent();
-    
+        
         this.WhenActivated(d => d(ViewModel!.ExitInteraction.RegisterHandler(DoExitAsync)));
     }
 
